@@ -1,0 +1,137 @@
+/*
+We somehow need to fix the width of the wrapper bg when the page width is reduced (for resolution differences, etc.).
+It always extends over the #all bg which does adjust properly when the width is reduced.
+I think it's because the input boxes have a min-width that prevents them from fluidly adjusting to the size.
+Not sure how to fix that without messing up the layout.
+Also, I added the input box highlights (they're animated!) and fixed a few small layout things.
+*/
+
+/*****************************
+Global attributes
+******************************/
+html *
+{
+   font-size: 1em;
+   font-family:sans-serif;
+}
+#all {
+    background-color:#98678e;
+    max-width: 60%;
+    min-width: 810px;
+    margin: 0 auto;
+    border-radius:5px;
+}
+.wrapper {
+    margin: 10px 10px 10px 2px;
+    background-color:#ebc2e0;
+    padding:2px;
+    border-radius:3px;
+}
+
+/*****************************
+Form settings
+******************************/
+fieldset {
+    border: 0;
+}
+legend {
+    color:#ebc2e0;
+    font-family:sans-serif;
+    font-weight:bold;
+    padding: 10px 0 5px 5px;
+	font-size: 1.5em;
+}
+
+/*****************************
+Layout (left and right columns)
+******************************/
+.left {
+    float:left;
+    margin-right:50%;
+    max-width:50%;
+}
+.right {
+    float:left;
+    margin-left:50%;
+    max-width:50%;
+}
+.instructions {
+    display:block;
+    margin: 10px 2px 2px 2px;
+    background-color:#ebc2e0;     /*just messing around since Lindsay was joking about having a purple and pink theme.*/
+    padding:0 0 20px 0;
+    border-radius:3px;
+}
+#mult{
+    height:80px;
+}
+
+/*****************************
+Input boxes and labels
+******************************/
+input, select {
+	height: 1.5em;
+    border:none;
+    font-size:1em;
+    min-width:175px;
+    max-width:50%;
+}
+td input {
+	border: solid gray;
+	border-width: 2px;
+}
+input, textarea, select {
+
+    border:none;
+}
+label {
+    float: left;
+    max-width: 45%;
+    text-align: left;
+    overflow:auto;
+    color:#444;
+    text-shadow: 0 0 2px #ddd;
+    padding: 5px 10px 2px 10px;
+}
+
+/******************************
+Input box glow and animation
+******************************/
+select, input[type=text], textarea {
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+}
+select:focus, input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(80, 122, 238, 1);
+}
+
+/*****************************
+Submit button
+******************************/
+.button {
+    background-color:#98678e;
+	border:3px solid #ebc2e0;
+    border-radius:5px;
+	display:inline-block;
+	font-size:15px;
+	font-weight:bold;
+	height:35px;
+	line-height:20px;
+	width:15%;
+	min-width:130px;
+	text-align:center;
+}
+.button:hover {
+	background-color:#ebc2e0;
+	cursor:pointer;
+}
+.button:active {
+	position:relative;
+	top:1px;
+	left:1px;
+}

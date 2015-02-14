@@ -1,0 +1,172 @@
+/*****************************
+Global attributes
+******************************/
+html *
+{
+   font-size: 1em;
+   font-family:sans-serif;
+}
+#all {
+    /*
+    background-color:#98678e;
+    */
+    background-color:#f1f1f1;
+    max-width: 60%;
+    min-width: 1000px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+.wrapper {
+    margin: 0px 0px 0px 0px;
+    padding: 10px 0px 10px 0px;
+    background-color:#ebc2e0;
+    border-radius: 5px;
+}
+
+/*****************************
+Form settings
+******************************/
+fieldset {
+    border: 0;
+}
+legend {
+    color:#98678e;
+    font-family:sans-serif;
+    font-weight:bold;
+    padding: 10px 0 5px 5px;
+	font-size: 1.5em;
+}
+.first{
+    display:block !important;
+}
+
+/*****************************
+Layout (left and right columns)
+******************************/
+#right {
+    width:50%;
+    float:right;
+    margin-top:2%;
+}
+#left {
+    width:50%;
+    float:left;
+    margin-top:2%;
+}
+#mult {
+    height:90px;
+}
+.right {
+    display:block ;
+}
+.left {
+  display:block !important;
+}
+
+/*****************************
+Input boxes and labels
+******************************/
+.wrapper input, select {
+	height: 1.7em;
+    border:none;
+    font-size:1em;
+    width:50%;
+    border:none;
+    border-radius: 3px;
+    display:inline-block;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+}
+.wrapper td input {
+	width:225px;
+	/*
+	border: solid gray;
+	border-width: 2px;
+	*/
+}
+th, td {
+    color:#555555;
+}
+.wrapper label {
+    width:200px;
+    float: left;
+    max-width: 45%;
+    text-align: right;
+    overflow:auto;
+    color:#555555;
+    text-shadow: 0 0 2px #ddd;
+    padding: 5px 10px 2px 10px;
+    display:inline-block;
+}
+.ingredients{
+    text-align: center;
+}
+.instructions {
+	text-align: center;
+	border-radius: 3px;
+	border: 0px;
+}
+textarea {
+	border-radius: 3px;
+}
+
+/******************************
+Input box glow and animation (required boxes glow red, others glow blue/purple)
+******************************/
+select, input, textarea {
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  outline: none;
+}
+select:focus, input:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(80, 122, 238, 1);
+}
+input:required:focus, select:required:focus {
+    box-shadow: 0 0 5px red;
+}
+
+/*****************************
+Submit button
+******************************/
+button {
+    background-color:#ebc2e0;
+	display:inline-block;
+	border:3px solid #98678e;
+	border-radius:5px;
+	font-size:15px;
+	font-weight:bold;
+	height:35px;
+	line-height:20px;
+	width: 150px;
+	color:#555555;
+}
+#button {
+    text-align:center;
+}
+button:hover, button:focus {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+	border:0px;
+	background-color:#98678e;
+	color:#ffffff;
+	cursor: pointer;
+}
+button:active {
+    padding: 0;
+	position: relative;
+	top: 1px;
+	left: 1px;
+}
+
+/*****************************
+Checkbox styling
+******************************/
+/*
+.boxed {
+  border: 1px solid #98678e;
+}
+*/

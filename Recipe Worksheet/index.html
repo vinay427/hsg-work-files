@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<!-- Links a form with a Google Form to populate a Google Spreadsheet with submitted recipes -->
+<html>
+<head>  
+<title>Recipe Worksheet</title>
+
+<meta charset="UTF-8">
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="iestyle.css" />
+<![endif]-->
+<!--[if !IE]><!-->
+<link rel="stylesheet" type="text/css" href="style.css" />
+<!--<![endif]-->
+
+<style>
+    
+/*****************************
+Global attributes
+******************************/
+html *
+{
+   font-size: 1em;
+   font-family:sans-serif;
+}
+#all {
+    /*
+    background-color:#98678e;
+    */
+    background-color:#f1f1f1;
+    max-width: 60%;
+    min-width: 1000px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+.wrapper {
+    margin: 0px 0px 0px 0px;
+    padding: 10px 0px 10px 0px;
+    background-color:#ebc2e0;
+    border-radius: 5px;
+}
+
+/*****************************
+Form settings
+******************************/
+fieldset {
+    border: 0;
+}
+legend {
+    color:#98678e;
+    font-family:sans-serif;
+    font-weight:bold;
+    padding: 10px 0 5px 5px;
+	font-size: 1.5em;
+}
+.first{
+    display:block !important;
+}
+
+/*****************************
+Layout (left and right columns)
+******************************/
+#right {
+    width:50%;
+    float:right;
+    margin-top:2%;
+}
+#left {
+    width:50%;
+    float:left;
+    margin-top:2%;
+}
+#mult {
+    height:90px;
+}
+.right {
+    display:block ;
+}
+.left {
+  display:block !important;
+}
+
+/*****************************
+Input boxes and labels
+******************************/
+.wrapper input, select {
+	height: 1.7em;
+    border:none;
+    font-size:1em;
+    width:50%;
+    border:none;
+    border-radius: 3px;
+    display:inline-block;
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+}
+.wrapper td input {
+	width:225px;
+	/*
+	border: solid gray;
+	border-width: 2px;
+	*/
+}
+th, td {
+    color:#555555;
+}
+.wrapper label {
+    width:200px;
+    float: left;
+    max-width: 45%;
+    text-align: right;
+    overflow:auto;
+    color:#555555;
+    text-shadow: 0 0 2px #ddd;
+    padding: 5px 10px 2px 10px;
+    display:inline-block;
+}
+.ingredients{
+    text-align: center;
+}
+.instructions {
+	text-align: center;
+	border-radius: 3px;
+	border: 0px;
+}
+textarea {
+	border-radius: 3px;
+}
+
+/******************************
+Input box glow and animation (required boxes glow red, others glow blue/purple)
+******************************/
+select, input, textarea {
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+  outline: none;
+}
+select:focus, input:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(80, 122, 238, 1);
+}
+input:required:focus, select:required:focus {
+    box-shadow: 0 0 5px red;
+}
+
+/*****************************
+Submit button
+******************************/
+button {
+    background-color:#ebc2e0;
+	display:inline-block;
+	border:3px solid #98678e;
+	border-radius:5px;
+	font-size:15px;
+	font-weight:bold;
+	height:35px;
+	line-height:20px;
+	width: 150px;
+	color:#555555;
+}
+#button {
+    text-align:center;
+}
+button:hover, button:focus {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+	border:0px;
+	background-color:#98678e;
+	color:#ffffff;
+	cursor: pointer;
+}
+button:active {
+    padding: 0;
+	position: relative;
+	top: 1px;
+	left: 1px;
+}
+
+/*****************************
+Checkbox styling
+******************************/
+/*
+.boxed {
+  border: 1px solid #98678e;
+}
+*/
+    
+</style>
+
+<script>
+	function showOther() {
+		if (document.getElementById('group_592477682_21').selected) {
+			document.getElementById('otherInput').style.display = 'block';
+		}
+		else document.getElementById('otherInput').style.display = 'none';
+	}
+</script>
+</head>
+
+<body>
+    <div id="all">
+    <!-- Link to Google Form for population of results, form header and <form> start tag -->
+    <form name="recipe" action="https://docs.google.com/forms/d/1If6ZOMELanSpND0xk_1xbfZQdXzgjTZBtgHHJ1M0qXc/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">
+        <fieldset>
+        <legend>Recipe Worksheet</legend>
+    <!-- Form labels -->
+    <div class="wrapper">
+                <div id="left"> <!--********************THE LEFT SIDE********************-->
+                    <div class="left">
+                            <label for="entry_1057755917">Formal Recipe Name*:</label>
+                            <input class="pure-input-1" placeholder="Limit 40 char." name="entry.1057755917" type="text" tabindex=1 value="" required>
+                    </div>
+
+                    <div class="left">
+            				<label for="entry_226151173">Yield Amount*:</label>
+                            <input class="pure-input-1" name="entry_226151173" type="text" tabindex=3 required>
+            		</div>
+                    
+                    <div class="left">
+                            <label for="entry.1785945300">Yield Weight:</label>
+                            <input class="pure-input-1" placeholder="If by pan, incl. total weight" name="entry.1785945300" type="text" tabindex=5>
+                    </div>
+                    
+                    <div class="left">
+                            <label for="entry.845326222">Portion Size*:</label>
+                            <input class="pure-input-1" placeholder="Serving size of portion" name="entry.845326222" type="text" tabindex=7 required>
+                    </div>
+                    
+                    <div class="left">
+                            <label for="entry.885864209">Total Weight Before*:</label>
+                            <input class="pure-input-1" placeholder="Before cook, excl. pans" name="entry.885864209" type="text" tabindex=9 required>
+                    </div>
+                    
+                    <div class="left">
+                            <label for="entry.1184803287">Minimum Batch:</label>
+                            <input class="pure-input-1" placeholder="Minimum by equip." name="entry.1184803287" type="text" tabindex=11>
+                    </div>
+                    
+                    <div class="left">
+                            <label for="entry.1049389123">Cooking Time*:</label>
+                            <input class="pure-input-1" placeholder="Total cook time (min)" name="entry.1049389123" type="text" tabindex=13 required>
+                    </div>
+                    
+                    <div class="left">
+                            <label for="entry.1130727476">Cooking Temp*:</label>
+                            <input class="pure-input-1" placeholder="Temp to cook at (F)" name="entry.1130727476" type="text" tabindex=15 required>
+                    </div>
+                    
+                    <div class = "left">
+                            <label for="entry.99564903">Serving Pan*:</label>
+                            <select class="pure-input-1" name="entry.99564903" tabindex=16 required>
+                                <option selected value="">Select a pan...</option>
+                                <option value="Full Hotel Pan 2">Full Hotel Pan 2"</option>
+            					<option value="Full Hotel Pan 4">Full Hotel Pan 4"</option>
+            					<option value="Half Hotel Pan 2">Half Hotel Pan 2"</option>
+            					<option value="Half Hotel Pan 4">Half Hotel Pan 4"</option>
+            					<option value="Pie Pan">Pie Pan</option>
+            					<option value="Sheet Pan">Sheet Pan</option>
+            					<option value="Dinner Plate">Dinner Plate</option>
+            					<option value="Dessert Plate">Dessert Plate</option>
+            					<option value="Salad Plate">Salad Plate</option>
+            					<option value="Soup Bowl">Soup Bowl</option>
+            					<option value="Pudding Pan">Pudding Pan</option>
+            					<option value="Soup Pot">Soup Pot</option>
+            					<option value="Glass Sherbet">Glass Sherbet</option>
+            					<option value="Punch Bowl">Punch Bowl</option>
+            					<option value="Half Skinny Hotel Pan 2">Half Skinny Hotel Pan 2"</option>
+            					<option value="Half Skinny Hotel Pan 4">Half Skinny Hotel Pan 4"</option>
+            					<option value="Half Skinny Hotel Pan 6">Half Skinny Hotel Pan 6"</option>
+            					<option value="Squeeze Bottle">Squeeze Bottle</option>
+                            </select>
+                        </div>
+            			<div class = "left">
+                            <label for="entry.144361153">Serving Utensil*:</label>
+                            <select class="pure-input-1" name="entry.144361153" id="entry.144361153" tabindex=17 required>
+                                <option selected value="">Select a utensil...</option>
+            					<option value="Spoon Solid">Spoon Solid</option>
+            					<option value="Spoon Perforated">Spoon Perforated</option>
+            					<option value="Spoodle 1 Ounce">Spoodle 1 Ounce</option>
+            					<option value="Spoodle 2 Ounce">Spoodle 2 Ounce</option>
+            					<option value="Spoodle 3 Ounce">Spoodle 3 Ounce</option>
+            					<option value="Spoodle 6 Ounce">Spoodle 6 Ounce</option>
+            					<option value="Ladle 4 ounce">Ladle 4 ounce</option>
+            					<option value="Ladle 2 ounce">Ladle 2 ounce</option>
+            					<option value="Option 9">Option 9</option>
+            					<option value="Scoop #12 (2.5-3 ounce)">Scoop #12 (2.5-3 ounce)</option>
+            					<option value="Scoop #16 (2-2.5 ounce)">Scoop #16 (2-2.5 ounce)</option>
+            					<option value="Fork">Fork</option>
+            					<option value="Tongs">Tongs</option>
+            					<option value="Spatula Serving">Spatula Serving</option>
+            					<option value="Spatula Pie">Spatula Pie</option>
+            					<option value="Spatula Lasagna">Spatula Lasagna</option>
+            					<option value="Spreader">Spreader</option>
+            					<option value="Plastic Glove">Plastic Glove</option>
+            					<option value="Tongs Black Small">Tongs Black Small</option>
+            					<option value="Blue Cup">Blue Cup</option>
+            					<option value="Coffee Cup">Coffee Cup</option>
+            					<option value="Frilled Toothpicks">Frilled Toothpicks</option>
+            					<option value="Spoodle 4 Ounce">Spoodle 4 Ounce</option>
+            					<option value="Ladle Punch">Ladle Punch</option>
+            					<option value="Spatula Dessert">Spatula Dessert</option>
+            					<option value="Tongs Black large">Tongs Black large</option>
+            					<option value="Tongs Black Medium">Tongs Black Medium</option>
+            					<option value="Squeeze Bottle">Squeeze Bottle</option>
+            				</select>
+                        </div>
+                        <div class="boxed">
+                            <input type="checkbox" name="emailReceipt" id="emailReceipt" value="true"c hecked>
+                            <label for="emailReceipt">Email link to edit:</label>
+                        </div>
+                    </div> <!--***************END LEFT*************-->
+                
+                <!--**************THE RIGHT SIDE******************-->
+                <div id = "right">
+                    <div class="right">
+                        <label for="entry_504918047">Common Name*:</label>
+                        <input class="pure-input-1" placeholder="Name in FSS for search" name="entry_504918047" id="entry_504918047" type="text" tabindex=2 required>
+                    </div>
+
+                    <div class="right">
+                        <label for="entry.860797286">Yield Unit*:</label>
+                        <input class="pure-input-1" placeholder="Ex. pans, gallons, lbs" name="entry.860797286" id="entry.860797286" type="text" tabindex=4 required>
+                    </div>
+
+        			<div class = "right">
+                        <label for="entry.2086332948">Portion Weight*:</label>
+                        <input class="pure-input-1" placeholder="Weight of one portion" name="entry.2086332948" id="entry.2086332948" type="text" tabindex=6 required>
+                    </div>
+
+        			<div class="right">
+                        <label for="entry_1841673977">Total Weight After*:</label>
+                        <input class="pure-input-1" placeholder="After cook, excl. pans" name="entry_1841673977" id="entry_1841673977" type="text" tabindex=8 required>
+                    </div>
+
+        			<div class="right">
+                        <label for="entry.879096428">Maximum Batch*:</label>
+                        <input class="pure-input-1" placeholder="Size limited by equip." name="entry.879096428" id="entry.879096428" type="text" tabindex=10 required>
+                    </div>
+
+        			<div class="right">
+                        <label for="entry.1636052794">Prep Time*:</label>
+                        <input class="pure-input-1" placeholder="Total prep time (min)" name="entry.1636052794" id="entry.1636052794" type="text" tabindex=12 required>
+                    </div>
+
+        			<div class="right">
+                        <label for="entry.308064002">Internal Temp*:</label>
+                        <input class="pure-input-1" placeholder="Temp before serving (F)" name="entry.308064002" id="entry.308064002" type="text" tabindex=14 required>
+                    </div>
+                        
+                    <!--Cooking Equipment Choices -->
+            		<div class="right">
+                        <label>Cooking Utensils Used:<br>(Hold CTRL to select mult.)</label>
+            			<select size=6 name="entry.592477682" multiple id = "mult" tabindex=18 required>
+            			    <option name="entry.592477682" value="__other_option__" id="group_592477682_21" onclick="javascript:showOther();">Other</option> -->
+                            <option value="Oven"  id="group_592477682_1" onclick="javascript:showOther();">Oven</option>
+                            <option value="Grill" id="group_592477682_2" onclick="javascript:showOther();">Grill</option>
+                            <option value="Steamer" id="group_592477682_3" onclick="javascript:showOther();">Steamer</option>
+                            <option value="Stockpot" id="group_592477682_4" onclick="javascript:showOther();">Stockpot</option>
+                            <option value="Tilt Skillet" id="group_592477682_5" onclick="javascript:showOther();">Tilt Skillet</option>
+                            <option value="Slicer" id="group_592477682_6" onclick="javascript:showOther();">Slicer</option>
+                            <option value="Buffalo Chopper" id="group_592477682_7" onclick="javascript:showOther();">Buffalo Chopper</option>
+                            <option value="Robot Coupe" id="group_592477682_8" onclick="javascript:showOther();">Robot Coupe</option>
+                            <option value="Mixer" id="group_592477682_9" onclick="javascript:showOther();">Mixer</option>
+                            <option value="Pizza Prep Table" id="group_592477682_10" onclick="javascript:showOther();">Pizza Prep Table</option>
+                            <option value="Impinger Oven" id="group_592477682_11" onclick="javascript:showOther();">Impinger Oven</option>
+                            <option value="Combi Oven" id="group_592477682_12" onclick="javascript:showOther();">Combi Oven</option>
+                            <option value="Revolving Oven" id="group_592477682_13" onclick="javascript:showOther();">Revolving Oven</option>
+                            <option value="Pizza Oven" id="group_592477682_14" onclick="javascript:showOther();">Pizza Oven</option>
+                            <option value="Combi Therm Oven" id="group_592477682_15" onclick="javascript:showOther();">Combi Therm Oven</option>
+                            <option value="Blast Chiller" id="group_592477682_16" onclick="javascript:showOther();">Blast Chiller</option>
+                            <option value="Convection Oven" id="group_592477682_17" onclick="javascript:showOther();">Convection Oven</option>
+                            <option value="Rice Cooker" id="group_592477682_18" onclick="javascript:showOther();">Rice Cooker</option>
+                            <option value="Immersion Blender" id="group_592477682_19" onclick="javascript:showOther();">Immersion Blender</option>
+                            <option value="Smoker" id="group_592477682_20" onclick="javascript:showOther();">Smoker</option>
+                        </select>
+
+                    <div class="right" id="otherInput" style="display:none">
+                        <label for="entry.592477682.other_option_response" class="other">Other:</label>
+                        <input class="pure-input-1" placeholder="Other utensil" name="entry.592477682.other_option_response" id="entry.592477682.other_option_response" type="text" tabindex=19>
+                    </div>
+                </div>
+                </div><!--****************************END RIGHT**********************-->
+			<!-- End wrapper -->
+
+    <!-- Ingredients table -->
+        <div class="wrapper">
+            <table align="center">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Preparation</th>
+                        <th>Order Info</th>
+                		<th>Weight</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input class="pure-input-1" placeholder="Ingredient 1" name="entry_679975505" id="entry_679975505" type="text" required></td>
+                        <td><input class="pure-input-1" placeholder="Preparation of ingr. 1" name="entry.604988052" id="entry.604988052" type="text" required></td>
+                        <td><input class="pure-input-1" placeholder="SUPC item ID number" name="entry_62056173" id="entry_62056173" type="text" required></td>
+                		<td><input class="pure-input-1" placeholder="Weight (lbs or gallons)" name="entry_1367057986" id="entry_1367057986" type="text" required></td>
+                    </tr>
+                
+                    <tr>
+                        <td>2</td>
+                        <td><input class="pure-input-1" name="entry_271677470" id="entry_271677470" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_11689362" id="entry_11689362" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1814077331" id="entry_1814077331" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_183145876" id="entry_183145876" type="text"></td>
+                	</tr>
+                	
+                	<tr>
+                        <td>3</td>
+                        <td><input class="pure-input-1" name="entry_1928452959" id="entry_1928452959" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1106380060" id="entry_1106380060" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_221668058" id="entry_221668058" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1665234138" id="entry_1665234138" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>4</td>
+                        <td><input class="pure-input-1" name="entry_1711244763" id="entry_1711244763" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_2017883657" id="entry_2017883657" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1535529433" id="entry_1535529433" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_554261997" id="entry_554261997" type="text"></td>
+                	</tr>
+            
+                    <tr>
+                        <td>5</td>
+                        <td><input class="pure-input-1" name="entry_1099908099" id="entry_1099908099" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1208832668" id="entry_1208832668" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_842926191" id="entry_842926191" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_293588325" id="entry_293588325" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>6</td>
+                        <td><input class="pure-input-1" name="entry_2096008951" id="entry_2096008951" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1561903848" id="entry_1561903848" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_474358092" id="entry_474358092" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1717100238" id="entry_1717100238" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>7</td>
+                        <td><input class="pure-input-1" name="entry_827385065" id="entry_827385065" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_397467303" id="entry_397467303" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1533225131" id="entry_1533225131" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1494493093" id="entry_1494493093" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>8</td>
+                        <td><input class="pure-input-1" name="entry_1340069327" id="entry_1340069327" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_801180902" id="entry_801180902" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1862965109" id="entry_1862965109" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1359225161" id="entry_1359225161" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>9</td>
+                        <td><input class="pure-input-1" name="entry_956167725" id="entry_956167725" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_264246569" id="entry_264246569" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_778664997" id="entry_778664997" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1524726065" id="entry_1524726065" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>10</td>
+                        <td><input class="pure-input-1" name="entry_336146211" id="entry_336146211" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_796677147" id="entry_796677147" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_2085088587" id="entry_2085088587" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_276777690" id="entry_276777690" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>11</td>
+                        <td><input class="pure-input-1" name="entry_1604613014" id="entry_1604613014" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1699228423" id="entry_1699228423" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_272998551" id="entry_272998551" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1825915146" id="entry_1825915146" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>12</td>
+                        <td><input class="pure-input-1" name="entry_897909444" id="entry_897909444" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1699769634" id="entry_1699769634" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_89944637" id="entry_89944637" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_2050268815" id="entry_2050268815" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>13</td>
+                        <td><input class="pure-input-1" name="entry_629347114" id="entry_629347114" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1020696168" id="entry_1020696168" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_708716571" id="entry_708716571" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1310535697" id="entry_1310535697" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>14</td>
+                        <td><input class="pure-input-1" name="entry_682749514" id="entry_682749514" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_201734605" id="entry_201734605" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1948255807" id="entry_1948255807" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1606886675" id="entry_1606886675" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>15</td>
+                        <td><input class="pure-input-1" name="entry_1584225709" id="entry_1584225709" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_2058300663" id="entry_2058300663" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1266217372" id="entry_1266217372" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1947652320" id="entry_1947652320" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>16</td>
+                        <td><input class="pure-input-1" name="entry_1619804041" id="entry_1619804041" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1739006355" id="entry_1739006355" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_465500731" id="entry_465500731" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_458183815" id="entry_458183815" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>17</td>
+                        <td><input class="pure-input-1" name="entry_1580092752" id="entry_1580092752" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_541268917" id="entry_541268917" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1966876021" id="entry_1966876021" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_309931874" id="entry_309931874" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>18</td>
+                        <td><input class="pure-input-1" name="entry_291546156" id="entry_291546156" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_148672711" id="entry_148672711" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1786179910" id="entry_1786179910" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_1142012097" id="entry_1142012097" type="text"></td>
+                    </tr>
+                
+                    <tr>
+                        <td>19</td>
+                        <td><input class="pure-input-1" name="entry_2107391582" id="entry_2107391582" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1883268634" id="entry_1883268634" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_262517817" id="entry_262517817" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_557351240" id="entry_557351240" type="text"></td>
+                	</tr>
+                
+                    <tr>
+                        <td>20</td>
+                        <td><input class="pure-input-1" name="entry_1015404" id="entry_1015404" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1790446509" id="entry_1790446509" type="text"></td>
+                        <td><input class="pure-input-1" name="entry_1149569517" id="entry_1149569517" type="text"></td>
+                		<td><input class="pure-input-1" name="entry_506436506" id="entry_506436506" type="text"></td>
+                	</tr>
+                </tbody>
+                </table>
+            </div>
+
+    <!-- Instructions box -->
+            <div class="instructions wrapper">
+                    <label>Instructions:</label>
+            		<textarea id="entry_1503063726" name="entry_1503063726" rows="10" cols="125">
+*** Clean and sanitize all surfaces, equipment and utensils
+*** Wash hands before, during, and after preparation
+*** Keep all cold ingredients at 45F or below 40F and all hot ingredients at or above 141F
+</textarea>
+            </div>
+            
+    <!-- Email response checkbox and submit button -->
+            <div class="wrapper">
+                <div id="button"><button type="submit" class="button">Submit Recipe</button></div>
+            </div>
+
+        </fieldset>
+    </form>
+    </div>
+
+    <!-- Script to populate form fields from URL variables -->
+    <script type = "text/javascript">
+        var data = location.search, f = document.recipe;
+        if(data)
+        {
+            data = location.search.substring(1); // remove the '?'
+            data = data.replace(/%20/g, " ").replace(/"/g, "&quot;");
+            data = data.split('&');
+            var pairs = {};
+                for(var i = 0; i < data.length; i++)
+                {
+                var tmp = data[i].split('=');
+                pairs[tmp[0]] = tmp[1];
+                }
+            for (var i in pairs)
+                if(f.elements[i]) {f.elements[i].value = pairs[i];}
+        }
+    </script>
+
+</body>
+</html>
